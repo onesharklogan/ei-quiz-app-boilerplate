@@ -1,8 +1,92 @@
 /* Your styles should be mobile-first and responsive */
 
+
 /** 
   * If you are unclear on how to utilize a mobile-first, responsive technique to write your CSS, here is an example: 
   *
   * https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
   *
 */
+
+
+/* Mobile First Styles */
+
+.wrapper {
+    font-family: 'Roboto', sans-serif;
+    text-align: left;
+    width: 100%;
+}
+
+
+/* Form styles */
+
+header {
+    /* background: #562685;
+color:white; 
+i want to look like microsoft forms example that i found - so eventually ill use this
+*/
+    background: rgb(184, 184, 184);
+    padding: 30px;
+}
+
+.group {
+    margin-top: 50px;
+    flex-direction: column;
+}
+
+.group-horiz {
+    display: flex;
+    flex-direction: row;
+    background: rgb(223, 223, 223);
+}
+
+.start-img {
+    height: 200px;
+}
+
+.results {}
+
+
+/* .item-horiz {
+    flex: 2;
+    margin: 10px;
+} */
+
+.item-question {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    background: rgb(184, 184, 184);
+}
+
+.pre-quiz {
+    text-align: center;
+}
+
+.responses {
+    background: rgb(223, 223, 223);
+}
+
+.response-option {
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.response-submit {
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 50px;
+    background: rgb(223, 223, 223);
+}
+
+
+/* Desktop Styles */
+
+@media all and (min-width: 800px) {
+    .wrapper {
+        width: 80%;
+        margin: auto;
+    }
+}

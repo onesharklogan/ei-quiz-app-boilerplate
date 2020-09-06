@@ -114,7 +114,7 @@ function generateQuestion(chosenIndex) {
 
 function generateIntro() {
     return `<div class ="intro-img">
-    <img class="start-img" src="/images/meditation.png" alt="header landscape graphic"></img>
+    <img class="start-img" src="images/meditation.png" alt="header landscape graphic"></img>
     <div class="intro">
 
         <h1>Meditation Fundamentals Quiz App</h1>

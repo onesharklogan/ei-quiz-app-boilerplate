@@ -1,32 +1,56 @@
-/* Your styles should be mobile-first and responsive */
-
-
-/** 
-  * If you are unclear on how to utilize a mobile-first, responsive technique to write your CSS, here is an example: 
-  *
-  * https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
-  *
-*/
-
-
 /* Mobile First Styles */
 
-.wrapper {
+* {
     font-family: 'Roboto', sans-serif;
-    text-align: left;
-    width: 100%;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+p {
+    font-size: 18px;
+}
+
+.hide {
+    display: none;
 }
 
 
-/* Form styles */
+/* Grabbed colors from header graphic and match */
 
-header {
-    /* background: #562685;
-color:white; 
-i want to look like microsoft forms example that i found - so eventually ill use this
-*/
-    background: rgb(184, 184, 184);
+.intro {
+    color: white;
+    background: #00878E;
     padding: 30px;
+}
+
+
+/* Make Button match the style of the header */
+
+.stylish-button {
+    background: #00878E;
+    border: none;
+    width: 105px;
+    height: 40px;
+    color: white;
+    font-size: 20px;
+}
+
+
+/* Lists should be basic with no indent or bullets */
+
+ul {
+    padding-inline-start: 0px;
+    list-style-type: none;
+}
+
+li {
+    width: 100%;
 }
 
 .group {
@@ -41,22 +65,19 @@ i want to look like microsoft forms example that i found - so eventually ill use
 }
 
 .start-img {
-    height: 200px;
+    width: 100%;
+    height: auto;
+    size: cover;
+    overflow: hidden;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
-
-.results {}
-
-
-/* .item-horiz {
-    flex: 2;
-    margin: 10px;
-} */
 
 .item-question {
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10px;
-    background: rgb(184, 184, 184);
+    /* background: #00878E; */
 }
 
 .pre-quiz {
@@ -64,7 +85,7 @@ i want to look like microsoft forms example that i found - so eventually ill use
 }
 
 .responses {
-    background: rgb(223, 223, 223);
+    /* background: rgb(223, 223, 223); */
 }
 
 .response-option {
@@ -73,20 +94,29 @@ i want to look like microsoft forms example that i found - so eventually ill use
     padding-bottom: 10px;
 }
 
+.results {
+    text-align: center;
+}
+
 .response-submit {
     text-align: center;
     padding-top: 15px;
     padding-bottom: 15px;
     margin-bottom: 50px;
-    background: rgb(223, 223, 223);
+    /* background: rgb(223, 223, 223); */
 }
 
 
 /* Desktop Styles */
 
 @media all and (min-width: 800px) {
-    .wrapper {
-        width: 80%;
-        margin: auto;
+    h1 {
+        font-size: 30px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    p {
+        font-size: 20px;
     }
 }

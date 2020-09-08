@@ -1,6 +1,8 @@
 /**
  * Example store structure
  */
+let answered = false;
+
 const store = {
     // 5 or more questions are required
     questions: [{
@@ -80,6 +82,7 @@ const store = {
 // These functions return HTML templates
 function generateQuestion(chosenIndex) {
     let questionData = store.questions[store.questionNumber];
+    answered = false;
     //+ questionData.question +
     //+ store.questions[store.questionNumber].answers[0] +
     return ` <form id="question-form">
@@ -180,6 +183,7 @@ function renderMain(state) {
 function handleAnswerButton() {
     $('main').on('click', '#answer-button', function(event) {
         event.preventDefault();
+        answered = true;
         $('#answer-button').addClass('hide');
         $('#next-button').removeClass('hide');
 
@@ -205,8 +209,10 @@ function handleRadioButton() {
     $('main').on('click', '#rb', function(event) {
 
         console.log("Hey you clicked a radio button!");
-
-        $('#answer-button').removeClass('hide');
+        if (!answered) {
+            $('#answer-button').removeClass('hide');
+            answered = true;
+        }
     });
 }
 

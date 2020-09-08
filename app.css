@@ -41,6 +41,19 @@ p {
     font-size: 20px;
 }
 
+#correct-message {
+    color: #00878E;
+}
+
+#score {
+    padding-left: 5px;
+    color: #00878E;
+}
+
+#incorrect-message {
+    color: red;
+}
+
 
 /* Lists should be basic with no indent or bullets */
 
@@ -82,10 +95,6 @@ li {
 
 .pre-quiz {
     text-align: center;
-}
-
-.responses {
-    /* background: rgb(223, 223, 223); */
 }
 
 .response-option {

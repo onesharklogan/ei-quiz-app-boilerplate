@@ -4,7 +4,7 @@
 const store = {
     // 5 or more questions are required
     questions: [{
-            question: 'Q1: What is the main cause of falling asleep during a meditation?',
+            question: 'Question 1 of 5: What is the main cause of falling asleep during a meditation?',
             answers: [
                 'Inadequate Sleep',
                 'Wandering Thoughts',
@@ -14,7 +14,7 @@ const store = {
             correctAnswer: '4'
         },
         {
-            question: 'Q2: How does meditation affect the mind?',
+            question: 'Question 2 of 5: How does meditation affect the mind?',
             answers: [
                 'Increased Lethargy',
                 'Increased Stress',
@@ -24,7 +24,7 @@ const store = {
             correctAnswer: '3'
         },
         {
-            question: 'Q3: What is the best time to meditate?',
+            question: 'Question 3 / 5: What is the best time to meditate?',
             answers: [
                 'When you are energized & alert',
                 'When in a noisy room',
@@ -34,7 +34,7 @@ const store = {
             correctAnswer: '1'
         },
         {
-            question: 'Q4: Which of the following statements is true about meditation?',
+            question: 'Question 4 of 5: Which of the following statements is true about meditation?',
             answers: [
                 'You need strong visualization to do it',
                 'It is boring and never gets easier',
@@ -44,7 +44,7 @@ const store = {
             correctAnswer: '4'
         },
         {
-            question: 'Q5: What should you do if you see/hear strange things during a meditation session?',
+            question: 'Question 5 of 5: What should you do if you see/hear strange things during a meditation session?',
             answers: [
                 'Seek medical help',
                 'Hold your breath',
@@ -82,33 +82,44 @@ function generateQuestion(chosenIndex) {
     let questionData = store.questions[store.questionNumber];
     //+ questionData.question +
     //+ store.questions[store.questionNumber].answers[0] +
-    return ` <div>
+    return ` <form id="question-form">
+   
     <div class="item-question">
         <h3>` + questionData.question + `</h3>
     </div>
 
     <div class="responses">
         <div class="response-option">
-            <input type="radio" class="radio-button" name="drone" value="1" checked>
+            <input type="radio" id='rb' class="radio-button" name="rb" value="1" >
             <label for="1">` + store.questions[store.questionNumber].answers[0] + `</label>
         </div>
         <div class="response-option">
-            <input type="radio" class="radio-button" name="drone" value="2" checked>
+            <input type="radio" id='rb' class="radio-button" name="rb" value="2" >
             <label for="2">` + store.questions[store.questionNumber].answers[1] + `</label>
         </div>
         <div class="response-option">
-            <input type="radio" class="radio-button" name="drone" value="3" checked>
+            <input type="radio" id='rb' class="radio-button" name="rb" value="3" >
             <label for="3">` + store.questions[store.questionNumber].answers[2] + `</label>
         </div>
         <div class="response-option">
-            <input type="radio" class="radio-button" name="drone" value="4" checked>
+            <input type="radio" id='rb' class="radio-button" name="rb" value="4" >
             <label for="4">` + store.questions[store.questionNumber].answers[3] + `</label>
         </div>
         <div class="response-option">
-        <button id='next-button' class='stylish-button'>Next</button>
+        <p id='correct-message' class='hide'><i>That answer is correct! Click Continue to Proceed</i></p>
+        <p id='incorrect-message' class='hide'><i>Oops, that's not right... Click Continue to Proceed</i></p>
+
+        </div>
+        <div class="response-option">
+        <button id='answer-button' class='stylish-button hide'>Answer</button>
+
+        <button id='next-button' class='stylish-button hide'>Continue</button>
+        </div>
+        <div class="response-option">
+        <p id="score">Current Score: ` + store.score + ` / 5 </p>
         </div>
     </div>
-</div>`;
+</form>`;
 
 }
 
@@ -125,23 +136,25 @@ function generateIntro() {
 }
 
 function generatePreQuiz() {
-    return ` <div class="pre-quiz">
+    return ` <form id="start-quiz-form"><div class="pre-quiz">
 <h2>Are you ready to take the Meditation Fundamentals Quiz?</h2>
-<form id="start-quiz-form">
+
     <p><button type="submit" class="stylish-button">Begin</button></p>
-</form>
-</div>`
+
+</div></form>`
 }
 
 function generateResults() {
-    return `<div class="results">
+    return `<form id="results-form"><div class="results">
     
             <div class="results">
                 <h3>Results! Let's see how well you did...</h3>
                         <p>You got ` + store.score + ` out of 5 questions correct!</p>
-                        <p>I hope you learned some interesting facts about meditation today.</p>               
+                        <p>I hope you learned some interesting facts about meditation today.</p>  
+                        <p><button type="submit" class="stylish-button">Restart</button></p>
+             
             </div>
-            </div>`;
+            </div></form>`;
 }
 
 /********** RENDER FUNCTION(S) **********/
@@ -151,6 +164,8 @@ function renderMain(state) {
     let mainHtml = generateIntro();
 
     if (state == "main") {
+        store.score = 0;
+        store.questionNumber = 0;
         mainHtml = mainHtml + generatePreQuiz();
 
     } else if (state == "question") {
@@ -162,18 +177,43 @@ function renderMain(state) {
 }
 
 /********** EVENT HANDLER FUNCTIONS **********/
+function handleAnswerButton() {
+    $('main').on('click', '#answer-button', function(event) {
+        event.preventDefault();
+        $('#answer-button').addClass('hide');
+        $('#next-button').removeClass('hide');
+
+        console.log("Hey you clicked a radio button!");
+        var value = $('.radio-button:checked').val();
+
+        if (store.questions[store.questionNumber].correctAnswer == value) {
+            //show message for correct answer and show next button
+            $('#correct-message').removeClass('hide');
+            $('#incorrect-message').addClass('hide');
+            store.score++;
+
+        } else {
+            //show incorrect message
+            $('#incorrect-message').removeClass('hide');
+            $('#correct-message').addClass('hide');
+        }
+
+    });
+}
+
+function handleRadioButton() {
+    $('main').on('click', '#rb', function(event) {
+
+        console.log("Hey you clicked a radio button!");
+
+        $('#answer-button').removeClass('hide');
+    });
+}
 
 function handleNextButton() {
     $('main').on('click', '#next-button', function(event) {
         event.preventDefault();
-        var value = $('.radio-button:checked').val();
 
-        if (store.questions[store.questionNumber].correctAnswer == value) {
-            // console.log("You got it right");
-            store.score++;
-        } else {
-            // console.log("you got it wrong");
-        }
 
         store.questionNumber++;
 
@@ -183,8 +223,6 @@ function handleNextButton() {
         } else {
             renderMain("question");
         }
-        console.log("Question Index:" + store.questionNumber);
-        console.log("Score:" + store.score + "/5");
 
     });
 }
@@ -204,10 +242,8 @@ function handleMain() {
     renderMain("main");
     handleStartQuiz();
     handleNextButton();
-
-    // handleNewItemSubmit();
-    // handleItemCheckClicked();
-    // handleDeleteItemClicked();
+    handleRadioButton();
+    handleAnswerButton();
 
 }
 
